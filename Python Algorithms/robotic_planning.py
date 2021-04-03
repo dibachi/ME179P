@@ -126,10 +126,10 @@ def isPointInConvexPolygon(q,P):
         else:
             #intnorm = [-y, x]
             intnorms[i,:] = np.array([-(P[i+1,1] - P[i,1]), (P[i+1,0] - P[i,0])])
-        #modifier is the vector from vertex i to point q
-        modifier = np.array([(q[0] - P[i,0]), (q[1] - P[i,1])])
+        #vector from vertex i to point q
+        vertex_to_q = np.array([(q[0] - P[i,0]), (q[1] - P[i,1])])
         #if the dot product between the two vectors is less than 0, the point is not in the polygon
-        cond = intnorms[i,:] * np.transpose(modifier)
+        cond = np.dot(intnorms[i,:], vertex_to_q)
         if cond < 0:
             return False
     return True
